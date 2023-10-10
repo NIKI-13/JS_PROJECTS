@@ -24,9 +24,9 @@ function play(choice){
     if (playerScore === 3 || pcScore === 3) {
         gameEnded = true; 
         if (playerScore === 3) {
-            info.innerText = "YOU WIN!";
+            info.innerText = `YOU CHOSE: ${choices[choice]} || COMPUTER CHOSE: ${choices[pcChoice]} \n\n YOU WIN!`;
         } else {
-            info.innerText = "COMPUTER WINS!";
+            info.innerText = `YOU CHOSE: ${choices[choice]} || COMPUTER CHOSE: ${choices[pcChoice]} \n\n COMPUTER WINS!`;
         }
     }
 }
@@ -46,7 +46,7 @@ document.querySelector('#scissors').addEventListener('click', () => {
     play(choice);
 });
 
-document.querySelector('#reset').addEventListener('click', () => {
+document.querySelector('#new').addEventListener('click', () => {
     playerScore = 0;
     pcScore = 0;
     document.querySelector('#yourScore').innerText = playerScore;
