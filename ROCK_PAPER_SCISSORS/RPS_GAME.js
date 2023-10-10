@@ -2,9 +2,12 @@ const choices =['ROCK', 'PAPER', 'SCISSORS'];
 let choice, pcChoice;
 let playerScore = 0;
 let pcScore = 0;
+let gameEnded = false; 
 const info = document.querySelector('#info');
 
 function play(choice){
+    if (gameEnded) return;
+    
     pcChoice = Math.floor(Math.random() * 3);
     info.innerText = `YOU CHOSE: ${choices[choice]} || COMPUTER CHOSE: ${choices[pcChoice]}`;
 
@@ -15,24 +18,39 @@ function play(choice){
         document.querySelector('#yourScore').innerText = playerScore;
     }
     else
-    pcScore++;
+        pcScore++;
     document.querySelector('#pcScore').innerText = pcScore;
+
+    if (playerScore === 3 || pcScore === 3) {
+        gameEnded = true; 
+        if (playerScore === 3) {
+            info.innerText = "YOU WIN!";
+        } else {
+            info.innerText = "COMPUTER WINS!";
+        }
+    }
 }
 
-document.querySelector('#rock').addEventListener('click',()=>{
+document.querySelector('#rock').addEventListener('click', () => {
     choice = 0;
     play(choice);
-
 });
 
-document.querySelector('#paper').addEventListener('click',()=>{
+document.querySelector('#paper').addEventListener('click', () => {
     choice = 1;
     play(choice);
-
 });
 
-document.querySelector('#scissors').addEventListener('click',()=>{
+document.querySelector('#scissors').addEventListener('click', () => {
     choice = 2;
     play(choice);
+});
 
+document.querySelector('#reset').addEventListener('click', () => {
+    playerScore = 0;
+    pcScore = 0;
+    document.querySelector('#yourScore').innerText = playerScore;
+    document.querySelector('#pcScore').innerText = pcScore;
+    info.innerText = "";
+    gameEnded = false; 
 });
